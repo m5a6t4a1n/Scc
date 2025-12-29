@@ -315,11 +315,11 @@ if model is not None and st.button("开始预测", type="primary"):
     st.progress(min(100, int(probability)))  # 确保不超过100
     
     # 添加风险等级解读 - 基于PI发生概率
-    if probability < 20:
+    if probability < 25:
         risk_level = "低风险"
         color = "green"
         recommendation = "建议：常规护理即可，优先采取以照护指导与技能提升为核心的初级干预，并借助预测平台实施周期性风险监测"
-    elif probability < 50:
+    elif probability < 68:
         risk_level = "中风险"
         color = "orange"
         recommendation = "建议：加强观察，增加翻身频率，在评估基础上加强资源协调与支持，适时引入气垫床等减压辅具以增强防护"
