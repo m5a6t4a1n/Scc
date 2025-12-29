@@ -347,7 +347,7 @@ if model is not None and st.button("开始预测", type="primary"):
             # 使用预创建的背景数据集
             background_df = create_background_data()
             
-            # 对于Logistic Regression，使用LinearExplainer
+            # 使用LinearExplainer
             explainer = shap.LinearExplainer(model, background_df)
             
             # 计算SHAP值
