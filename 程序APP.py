@@ -43,7 +43,7 @@ feature_abbreviations = {
     "Mlu": "Mlu"
 }
 
-# 特征范围定义 - 优化步长设置
+# 特征范围定义，默认值，步长设置
 feature_ranges = {
     "FCTI": {
         "type": "numerical", 
@@ -113,7 +113,7 @@ feature_ranges = {
     },
 }
 
-# 创建一个更稳定的背景数据集
+# 创建一个更稳定的背景数据集，以便初始化图形输出
 @st.cache_resource
 def create_background_data():
     """创建稳定的背景数据集"""
@@ -299,7 +299,7 @@ if model is not None and st.button("开始预测", type="primary"):
         predicted_class = model.predict(features_df)[0]
         predicted_proba = model.predict_proba(features_df)[0]
 
-        # 提取概率 - 修复逻辑错误
+        # 提取概率
         # 总是显示PI发生的概率（正类，类别1的概率）
         probability_positive = predicted_proba[1] * 100  # PI发生的概率
         probability_negative = predicted_proba[0] * 100  # 不发生PI的概率
@@ -379,7 +379,7 @@ if model is not None and st.button("开始预测", type="primary"):
                 show=False
             )
             
-            # 移除中文标题
+            # 显示中文标题
             # plt.title(f"SHAP力图 - PI发生概率: {probability:.2f}%", fontsize=12, pad=20)
             plt.tight_layout()
             
@@ -387,9 +387,9 @@ if model is not None and st.button("开始预测", type="primary"):
             plt.savefig(buf_force, format="png", bbox_inches="tight", dpi=100)
             plt.close()
             
-            # 生成 SHAP 瀑布图 - 修改这里，缩小瀑布图尺寸
+            # 生成 SHAP 瀑布图，并缩小瀑布图尺寸
             plt.figure(figsize=(10, 5), dpi=100)  # 减小瀑布图尺寸（原为12,6）
-            max_display = min(8, len(shap_df.columns))  # 减少显示特征数量
+            max_display = min(8, len(shap_df.columns))  # 显示8个特征数量
             
             # 创建Explanation对象
             exp = shap.Explanation(
@@ -420,7 +420,7 @@ if model is not None and st.button("开始预测", type="primary"):
                 plt.barh(range(len(sorted_idx)), shap_values_array[0][sorted_idx], color=colors)
                 plt.yticks(range(len(sorted_idx)), [shap_df.columns[i] for i in sorted_idx])
                 plt.xlabel("SHAP Value (Impact on PI Probability)")
-                # 移除中文标题
+                # 显示中文标题
                 # plt.title(f"特征对PI风险的影响 - PI发生概率: {probability:.2f}%", fontsize=12, pad=20)
                 
                 # 添加图例
@@ -511,7 +511,7 @@ if model is not None and st.button("开始预测", type="primary"):
             **解决方案：**
             1. 刷新页面并重试
             2. 确保所有输入值在合理范围内
-            3. 如果问题持续，请联系开发人员
+            3. 如果问题持续，请联系作者
             """)
 
 # 侧边栏信息
