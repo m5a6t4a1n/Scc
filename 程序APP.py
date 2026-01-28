@@ -387,7 +387,7 @@ if model is not None and st.button("开始预测", type="primary"):
             plt.savefig(buf_force, format="png", bbox_inches="tight", dpi=100)
             plt.close()
             
-            # 生成 SHAP 瀑布图，并缩小瀑布图尺寸
+            # 生成 SHAP 瀑布图，并缩小显示尺寸
             plt.figure(figsize=(10, 5), dpi=100)  # 减小瀑布图尺寸（原为12,6）
             max_display = min(8, len(shap_df.columns))  # 显示8个特征数量
             
